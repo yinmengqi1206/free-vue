@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div>
-        <el-button type="primary" @click="logout()">注销</el-button>
+        <el-button class="logout" type="primary" @click="logout()">注销</el-button>
     </div>
 </template>
 
@@ -24,4 +24,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+    .logout{
+        float: right;
+        margin: 10px;
+    }
+</style>
