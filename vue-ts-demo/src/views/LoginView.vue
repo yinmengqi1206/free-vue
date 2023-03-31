@@ -22,6 +22,7 @@ import { LoginData } from '../type/login'
 import type { FormInstance } from 'element-plus'
 import { login } from '../request/api'
 import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     setup() {
@@ -47,10 +48,10 @@ export default defineComponent({
                     login(data.ruleForm).then(res => {
                         console.log(res)
                         localStorage.setItem("token", res.data)
-                        route.push("/home")
+                        route.push("/")
                     }, err => {
                         console.log(err)
-                        alert("登录失败")
+                        ElMessage.error('用户名密码错误')
                     })
                 } else {
                     console.log('error submit!', fields)
@@ -62,6 +63,9 @@ export default defineComponent({
         const resetForm = (formEl: FormInstance | undefined) => {
             if (!formEl) return
             formEl.resetFields()
+        }
+        if (localStorage.getItem("token")) {
+            route.push("/login")
         }
         return { ...toRefs(data), rules, ruleFormRef, submitForm, resetForm }
     }
