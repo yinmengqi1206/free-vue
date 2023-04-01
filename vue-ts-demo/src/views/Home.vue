@@ -41,9 +41,6 @@ import { useRouter } from 'vue-router'
 export default defineComponent({
     setup() {
         const route = useRouter()
-        if (!localStorage.getItem("token")) {
-            route.push("/login")
-        }
         const logout = () => {
             localStorage.removeItem("token")
             route.push("/login")
