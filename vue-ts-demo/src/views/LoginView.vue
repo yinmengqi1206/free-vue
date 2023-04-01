@@ -64,9 +64,6 @@ export default defineComponent({
             if (!formEl) return
             formEl.resetFields()
         }
-        if (localStorage.getItem("token")) {
-            route.push("/login")
-        }
         return { ...toRefs(data), rules, ruleFormRef, submitForm, resetForm }
     }
 })

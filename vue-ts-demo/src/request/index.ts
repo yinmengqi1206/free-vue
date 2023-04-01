@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ElMessage } from 'element-plus'
 //创建axios实例
 const service = axios.create({
     baseURL: "http://127.0.0.1:29013",
@@ -23,6 +24,7 @@ service.interceptors.response.use((res) => {
     return res.data;
 }, err => {
     console.log(err)
+    ElMessage.error('接口请求失败')
 })
 
 export default service;
