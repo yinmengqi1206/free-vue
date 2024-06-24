@@ -55,7 +55,6 @@ export default defineComponent({
                     })
                 } else {
                     console.log('error submit!', fields)
-                    return false;
                 }
             })
         }
