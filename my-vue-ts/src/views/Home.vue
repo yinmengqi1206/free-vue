@@ -34,21 +34,15 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-export default defineComponent({
-    setup() {
-        const route = useRouter()
-        const logout = () => {
-            localStorage.removeItem("token")
-            route.push("/login")
-        }
-        const menu = route.getRoutes().filter(x => x.meta.isShow)
-        return { logout, menu }
-    }
-})
+const route = useRouter()
+function logout(){
+    localStorage.removeItem("token")
+    route.push("/login")
+}
+const menu = route.getRoutes().filter(x => x.meta.isShow)
 </script>
 
 <style lang="scss" scoped>

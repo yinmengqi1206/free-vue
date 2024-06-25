@@ -39,7 +39,9 @@ const rules = {
     ],
 }
 const ruleFormRef = ref<FormInstance>()
+
 const route = useRouter()
+
 //登录
 async function submitForm(formEl: FormInstance | undefined) {
     if (!formEl) return
