@@ -16,56 +16,54 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs, ref } from 'vue'
+<script setup lang="ts">
+import {reactive, toRefs, ref } from 'vue'
 import { LoginData } from '../type/login'
 import type { FormInstance } from 'element-plus'
 import { login } from '../request/api'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
-export default defineComponent({
-    setup() {
-        const data = reactive(new LoginData())
-        const rules = {
-            username: [
-                { required: true, message: '请输入账号', trigger: 'blur' },
-                { min: 3, max: 10, message: '账号长度为3到10', trigger: 'blur' },
-            ],
-            password: [
-                { required: true, message: '请输入密码', trigger: 'blur' },
-                { min: 3, max: 10, message: '密码长度为3-10', trigger: 'blur' },
-            ],
-        }
-        const ruleFormRef = ref<FormInstance>()
-        const route = useRouter()
-        //登录
-        const submitForm = async (formEl: FormInstance | undefined) => {
-            if (!formEl) return
-            await formEl.validate((valid, fields) => {
-                if (valid) {
-                    console.log('submit!')
-                    login(data.ruleForm).then(res => {
-                        console.log(res)
-                        localStorage.setItem("token", res.data)
-                        route.push("/")
-                    }, err => {
-                        console.log(err)
-                        ElMessage.error('用户名密码错误')
-                    })
-                } else {
-                    console.log('error submit!', fields)
-                }
+const data = reactive(new LoginData())
+
+const {ruleForm} = toRefs(data)
+
+const rules = {
+    username: [
+        { required: true, message: '请输入账号', trigger: 'blur' },
+        { min: 3, max: 10, message: '账号长度为3到10', trigger: 'blur' },
+    ],
+    password: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 3, max: 10, message: '密码长度为3-10', trigger: 'blur' },
+    ],
+}
+const ruleFormRef = ref<FormInstance>()
+const route = useRouter()
+//登录
+async function submitForm(formEl: FormInstance | undefined) {
+    if (!formEl) return
+    await formEl.validate((valid, fields) => {
+        if (valid) {
+            console.log('submit!')
+            login(data.ruleForm).then(res => {
+                console.log(res)
+                localStorage.setItem("token", res.data)
+                route.push("/")
+            }, err => {
+                console.log(err)
+                ElMessage.error('用户名密码错误')
             })
+        } else {
+            console.log('error submit!', fields)
         }
-        //重置
-        const resetForm = (formEl: FormInstance | undefined) => {
-            if (!formEl) return
-            formEl.resetFields()
-        }
-        return { ...toRefs(data), rules, ruleFormRef, submitForm, resetForm }
-    }
-})
+    })
+}
+//重置
+function resetForm(formEl: FormInstance | undefined) {
+    if (!formEl) return
+    formEl.resetFields()
+}
 </script>
 
 <style lang="scss" scoped>
