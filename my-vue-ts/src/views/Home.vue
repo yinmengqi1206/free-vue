@@ -38,7 +38,7 @@
 import { useRouter } from 'vue-router'
 
 const route = useRouter()
-function logout(){
+function logout() {
     localStorage.removeItem("token")
     route.push("/login")
 }
