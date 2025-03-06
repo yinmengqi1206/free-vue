@@ -2,14 +2,45 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/myflex',
-    name: 'myflex',
-    component: () => import('../views/MyFlex.vue'),
+    path: '/',
+    name: 'official',
+    redirect: "company",
+    component: () => import('../views/official/index.vue'),
     children: [
       {
-        path: 'myflex-child',
-        name: 'myflex-child',
-        component: () => import('../views/MyFlexChild.vue')
+        path: 'company',
+        name: 'company',
+        component: () => import('../views/official/company.vue')
+      },
+      {
+        path: 'esports',
+        name: 'esports',
+        component: () => import('../views/official/esports.vue')
+      },
+      {
+        path: 'adSolutions',
+        name: 'adSolutions',
+        component: () => import('../views/official/adSolutions.vue')
+      },
+      {
+        path: 'technology',
+        name: 'technology',
+        component: () => import('../views/official/technology.vue')
+      },
+      {
+        path: 'news',
+        name: 'news',
+        component: () => import('../views/official/news.vue')
+      },
+      {
+        path: 'shop',
+        name: 'shop',
+        component: () => import('../views/official/shop.vue')
+      },
+      {
+        path: 'app',
+        name: 'app',
+        component: () => import('../views/official/app.vue')
       }
     ]
   },
@@ -19,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/LoginView.vue')
   },
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     redirect: "goods",
     component: () => import('../views/Home.vue'),

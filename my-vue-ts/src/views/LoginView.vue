@@ -1,6 +1,7 @@
 <template>
     <div class="login-box">
-        <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="80px" class="demo-ruleForm">
+        <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="80px"
+            class="demo-ruleForm">
             <h2>后台管理系统</h2>
             <el-form-item label="账号" prop="username">
                 <el-input v-model="ruleForm.username" autocomplete="off" />
@@ -17,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, toRefs, ref } from 'vue'
+import { reactive, toRefs, ref } from 'vue'
 import { LoginData } from '../type/login'
 import type { FormInstance } from 'element-plus'
 import { login } from '../request/api'
@@ -26,7 +27,7 @@ import { ElMessage } from 'element-plus'
 
 const data = reactive(new LoginData())
 
-const {ruleForm} = toRefs(data)
+const { ruleForm } = toRefs(data)
 
 const rules = {
     username: [
